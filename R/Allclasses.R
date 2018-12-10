@@ -26,10 +26,16 @@ SeqGeneSet <- setClass("SeqGeneSet",
                          GSEA.pval = "numeric",
                          GSEA.FWER = "numeric", 
                          GSEA.FDR = "numeric", 
+                         sc.ES = "matrix", 
+                         sc.ES.perm = "matrix", 
+                         sc.normFlag = "logical", 
+                         scGSEA = "logical", 
+                         sc.pval = "matrix", 
+                         sc.FDR = "matrix", 
                          version = "Versions"), 
                        prototype = prototype(
                          name = new("ScalarCharacter", NA),
-                         version = new("Versions", "0.0.1"))
+                         version = new("Versions", "0.0.2"))
 )
 
 newGeneSets <- function(GS, GSNames, GSDescs, geneList, 
@@ -47,7 +53,10 @@ newGeneSets <- function(GS, GSNames, GSDescs, geneList,
             GSEA.ES = numeric(0), GSEA.ES.pos = numeric(0), 
             GSEA.ES.perm = matrix(0, 0 ,0),  GSEA.score.cumsum = matrix(0, 0 ,0), 
             GSEA.normFlag = FALSE,  GSEA.pval = numeric(0), 
-            GSEA.FWER = numeric(0), GSEA.FDR = numeric(0) )
+            GSEA.FWER = numeric(0), GSEA.FDR = numeric(0),
+            sc.ES = matrix(0, 0 ,0), sc.ES.perm = matrix(0, 0 ,0),
+            sc.normFlag = FALSE, scGSEA = FALSE, 
+            sc.pval = matrix(0, 0 ,0), sc.FDR = matrix(0, 0 ,0) )
   GS
 }
 
