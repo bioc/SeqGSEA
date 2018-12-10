@@ -96,7 +96,7 @@ convertSymbol2Ensembl <- function(symbols) {
 }
 
 loadGenesets <- function(geneset.file, geneIDs, geneID.type=c("gene.symbol","ensembl"), 
-                         genesetsize.min = 5, genesetsize.max = 1000) {
+                         genesetsize.min = 5, genesetsize.max = 1000, singleCell = FALSE) {
   # geneIDs can contain more than one genes, splited by '+' (because of HTSeq counting)
   # geneIDs can be in either "gene symbols" or "ensembl gene names"
   geneset.name <- basename(geneset.file)
@@ -137,7 +137,7 @@ loadGenesets <- function(geneset.file, geneIDs, geneID.type=c("gene.symbol","ens
     }, USE.NAMES = FALSE)))
     gs[[i]] <- unique( idx$idx[ idx$symbol %in% temp.genes ] )
   } 
-  gene.set <- newGeneSets(name = geneset.name, sourceFile = geneset.file, 
+  gene.set <- newGeneSets(name = geneset.name, sourceFile = geneset.file, scGSEA = singleCell,
                   geneList=geneIDs, GS=gs, GSNames=gs.name, GSDescs=gs.descs, 
                   GSSizeMin=genesetsize.min, GSSizeMax=genesetsize.max) 
 }

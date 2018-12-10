@@ -9,7 +9,7 @@ those files can be downloaded at \url{http://www.broadinstitute.org/gsea/msigdb/
 }
 \usage{
 loadGenesets(geneset.file, geneIDs, geneID.type = c("gene.symbol", "ensembl"), 
-             genesetsize.min = 5, genesetsize.max = 1000)
+             genesetsize.min = 5, genesetsize.max = 1000, singleCell = FALSE)
 }
 \arguments{
   \item{geneset.file}{the file containing the gene set annotation.}
@@ -17,6 +17,7 @@ loadGenesets(geneset.file, geneIDs, geneID.type = c("gene.symbol", "ensembl"),
   \item{geneID.type}{indicating the type of gene IDs, gene symbol or emsembl gene IDs.}
   \item{genesetsize.min}{the minimum number of genes in a gene set that will be treated in the analysis.}
   \item{genesetsize.max}{the maximum number of genes in a gene set that will be treated in the analysis.}
+  \item{singleCell}{logical, whether to creat a SeqGeneSet object for scGSEA.}
 }
 \details{
 TBA
