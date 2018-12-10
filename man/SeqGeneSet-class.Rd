@@ -4,6 +4,7 @@
 \alias{SeqGeneSet-class}
 \alias{SeqGeneSet}
 \alias{[,SeqGeneSet,numeric-method}
+\alias{[,SeqGeneSet,numeric,ANY,ANY-method}
 \alias{show,SeqGeneSet-method}
 
 \title{Class \code{"SeqGeneSet"}}
