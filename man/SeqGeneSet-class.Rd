@@ -37,6 +37,13 @@ Objects can be created by calls of the function \code{\link{newGeneSets}}.
     \item{\code{GSEA.pval}:}{Object of class \code{"numeric"}. P-values of each gene set. }
     \item{\code{GSEA.FWER}:}{Object of class \code{"numeric"}. Family-wise error rate of each gene set. }
     \item{\code{GSEA.FDR}:}{Object of class \code{"numeric"}. False discovery rate of each gene set. }
+    \item{\code{sc.ES}:}{Object of class \code{"numeric"}. Enrichment scores in scGSEA. }
+    \item{\code{sc.ES.perm}:}{Object of class \code{"matrix"}. The enrichment scores of the permutation data sets in scGSEA. }
+    \item{\code{sc.normFlag}:}{Object of class \code{"logical"}. Logical indicating whether \code{sc.ES} has been normalized in scGSEA. }
+    \item{\code{scGSEA}:}{Object of class \code{"logical"}. Whether or not used for scGSEA. }
+    \item{\code{sc.pval}:}{Object of class \code{"numeric"}. P-values of each gene set in scGSEA. }
+    \item{\code{sc.FWER}:}{Object of class \code{"numeric"}. Family-wise error rate of each gene set in scGSEA. }
+    \item{\code{sc.FDR}:}{Object of class \code{"numeric"}. False discovery rate of each gene set in scGSEA. }
     \item{\code{version}:}{Object of class \code{"Versions"}. Version information. }
   }
 }
