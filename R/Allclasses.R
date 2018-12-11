@@ -31,6 +31,7 @@ SeqGeneSet <- setClass("SeqGeneSet",
                          sc.normFlag = "logical", 
                          scGSEA = "logical", 
                          sc.pval = "matrix", 
+                         sc.FWER = "matrix", 
                          sc.FDR = "matrix", 
                          version = "Versions"), 
                        prototype = prototype(
@@ -38,7 +39,7 @@ SeqGeneSet <- setClass("SeqGeneSet",
                          version = new("Versions", "0.0.2"))
 )
 
-newGeneSets <- function(GS, GSNames, GSDescs, geneList, 
+newGeneSets <- function(GS, GSNames, GSDescs, geneList, scGSEA = FALSE, 
                         name = NA_character_, sourceFile = NA_character_, 
                         GSSizeMin = 5, GSSizeMax = 1000 ) {
   stopifnot( length(GS) == length(GSNames) & length(GS) == length(GSDescs)) 
@@ -55,8 +56,8 @@ newGeneSets <- function(GS, GSNames, GSDescs, geneList,
             GSEA.normFlag = FALSE,  GSEA.pval = numeric(0), 
             GSEA.FWER = numeric(0), GSEA.FDR = numeric(0),
             sc.ES = matrix(0, 0 ,0), sc.ES.perm = matrix(0, 0 ,0),
-            sc.normFlag = FALSE, scGSEA = FALSE, 
-            sc.pval = matrix(0, 0 ,0), sc.FDR = matrix(0, 0 ,0) )
+            sc.normFlag = FALSE, scGSEA = scGSEA, 
+            sc.pval = matrix(0, 0 ,0), sc.FWER = matrix(0, 0 ,0), sc.FDR = matrix(0, 0 ,0) )
   GS
 }
 
