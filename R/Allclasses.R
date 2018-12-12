@@ -64,26 +64,27 @@ newGeneSets <- function(GS, GSNames, GSDescs, geneList, scGSEA = FALSE,
 setMethod("show", 
           signature(object="SeqGeneSet"),
           function(object) {
-            expr1 <- ifelse(length(object@GSEA.ES) > 0, 
+            if(!object@scGSEA) {
+              expr1 <- ifelse(length(object@GSEA.ES) > 0, 
                             paste(selectSome(object@GSEA.ES, maxToShow=4), collapse=", "), 
                             "not computed")
-            expr2 <- ifelse(length(object@GSEA.ES.pos) > 0, 
+              expr2 <- ifelse(length(object@GSEA.ES.pos) > 0, 
                             paste(selectSome(object@GSEA.ES.pos, maxToShow=4), collapse=", "), 
                             "not computed")
-            expr3 <- ifelse(ncol(object@GSEA.ES.perm) > 0, 
+              expr3 <- ifelse(ncol(object@GSEA.ES.perm) > 0, 
                             paste(ncol(object@GSEA.ES.perm), "-time permutation", sep=""),  
                             "not performed")
-            expr4 <- ifelse(object@GSEA.normFlag, "Yes", "No")
-            expr5 <- ifelse(length(object@GSEA.pval) > 0, 
+              expr4 <- ifelse(object@GSEA.normFlag, "Yes", "No")
+              expr5 <- ifelse(length(object@GSEA.pval) > 0, 
                             paste(selectSome(object@GSEA.pval, maxToShow=4), collapse=", "), 
                             "not computed")
-            expr6 <- ifelse(length(object@GSEA.FWER) > 0, 
+              expr6 <- ifelse(length(object@GSEA.FWER) > 0, 
                             paste(selectSome(object@GSEA.FWER, maxToShow=4), collapse=", "), 
                             "not computed")
-            expr7 <- ifelse(length(object@GSEA.FDR) > 0, 
+              expr7 <- ifelse(length(object@GSEA.FDR) > 0, 
                             paste(selectSome(object@GSEA.FDR, maxToShow=4), collapse=", "), 
                             "not computed")
-            cat("SeqGeneSet object: ", object@name, "\n",
+              cat("SeqGeneSet object: ", object@name, "\n",
                 "GeneSetSourceFile: ", object@sourceFile, "\n", 
                 "GeneSets: ", paste(selectSome(object@GSNames, maxToShow=4), 
                                     collapse="\n          "), "\n", 
@@ -103,6 +104,44 @@ setMethod("show",
                 "ES FWER: ", expr6, "\n",
                 "ES FDR: ", expr7, "\n",
                 sep="")
+            } else {
+              expr1 <- ifelse(length(object@sc.ES) > 0, 
+                              paste(nrow(object@sc.ES), "genesets by", ncol(object@sc.ES), "cells computed"), 
+                              "not computed")
+              expr2 <- ifelse(length(object@sc.ES.perm) > 0, 
+                              paste(nrow(object@sc.ES), "genesets by", ncol(object@sc.ES), "permutation times computed"), 
+                              "not computed")
+              expr3 <- ifelse(object@sc.normFlag, "Yes", "No")
+              expr4 <- ifelse(length(object@sc.pval) > 0, 
+                              paste(nrow(object@sc.pval), "genesets by ", ncol(object@sc.pval), " cells computed"), 
+                              "not computed")
+              expr5 <- ifelse(length(object@sc.FWER) > 0, 
+                              paste(nrow(object@sc.FWER), "genesets by ", ncol(object@sc.FWER), " cells computed"), 
+                              "not computed")
+              expr6 <- ifelse(length(object@sc.FDR) > 0, 
+                              paste(nrow(object@sc.FDR), "genesets by ", ncol(object@sc.FDR), " cells computed"), 
+                              "not computed")
+              
+              cat("SeqGeneSet object: ", object@name, "\n",
+                "GeneSetSourceFile: ", object@sourceFile, "\n", 
+                "GeneSets: ", paste(selectSome(object@GSNames, maxToShow=4), 
+                                    collapse="\n          "), "\n", 
+                "  with the number of genes in respective sets: ", 
+                paste(selectSome(object@GSSize, maxToShow=4), collapse=", "), "\n",
+                "  brief descriptions: \n          ",
+                paste(selectSome(object@GSDescs, maxToShow=4), collapse="\n          "), "\n",
+                "  # gene sets passed filter: ", size(object), 
+                "  (#genes >= ", object@GSSizeMin, " AND <= ", object@GSSizeMax, ")\n", 
+                "  # gene sets excluded: ", sizeOfExcludedGS(object), 
+                "  (#genes < ", object@GSSizeMin, " OR > ", object@GSSizeMax, ")\n",
+                "sc-ES scores: ", expr1, "\n",
+                "Permutated sc-ES scores: ", expr2, "\n", 
+                "sc-ES scores normalized: ", expr3, "\n",
+                "sc-ES p-value: ", expr4, "\n",
+                "sc-ES FWER: ", expr5, "\n",
+                "sc-ES FDR: ", expr6, "\n",
+                sep="")
+            }
           })
 
 setMethod("[", 
@@ -134,6 +173,16 @@ setMethod("[",
               GS@GSEA.FDR <- x@GSEA.FDR[i]
             if(length(x@GSEA.FWER) > 0)
               GS@GSEA.FWER <- x@GSEA.FWER[i]
+            if(nrow(x@sc.ES) > 0)
+              GS@sc.ES <- x@sc.ES[i,,drop=FALSE]
+            if(nrow(x@sc.ES.perm) > 0)
+              GS@sc.ES.perm <- x@sc.ES.perm[i,,drop=FALSE]
+            if(nrow(x@sc.pval) > 0)
+              GS@sc.pval <- x@sc.pval[i,,drop=FALSE]
+            if(nrow(x@sc.FWER) > 0)
+              GS@sc.FWER <- x@sc.FWER[i,,drop=FALSE]
+            if(nrow(x@sc.FDR) > 0)
+              GS@sc.FDR <- x@sc.FDR[i,,drop=FALSE]
             GS
           } )
 
