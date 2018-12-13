@@ -33,12 +33,12 @@ Xi Wang, xi.wang@newcastle.edu.au
 \code{\link{SeqGeneSet-class}}
 }
 \examples{
-## Not run: 
+\dontrun{
 data(RCS_example, package="SeqGSEA")
 geneIDs <- geneID(RCS_example)
 geneID.type <- "ensembl"
 geneset.file <- system.file("extdata", "gs_symb.txt",  package="SeqGSEA", mustWork=TRUE)
 GS <- loadGenesets(geneset.file, geneIDs, geneID.type = geneID.type)
 GS
-## End(Not run)
+}
 }

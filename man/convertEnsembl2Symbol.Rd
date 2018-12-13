@@ -22,7 +22,7 @@ Xi Wang, xi.wang@newcastle.edu.au
 \code{\link{convertSymbol2Ensembl}}
 }
 \examples{
-## Not run: 
+\dontrun{
 convertEnsembl2Symbol("ENSG00000162946") #DISC1
-## End(Not run)
+}
 }

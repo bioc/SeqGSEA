@@ -50,10 +50,8 @@ ctrl.pattern <- "^SN"
 case.files <- dir(dat.dir, pattern=case.pattern, full.names = TRUE)
 control.files <- dir(dat.dir, pattern=ctrl.pattern, full.names = TRUE)
 
-## Not run: 
-
+\dontrun{
 RCS <- loadExonCountData(case.files, control.files)
 RCS 
-
-## End (Not run)
+}
 }
