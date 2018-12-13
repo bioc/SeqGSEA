@@ -7,14 +7,16 @@ Initialize a new SeqGeneSet object
 This is an internal function to generate a new SeqGeneSet object.
 }
 \usage{
-newGeneSets(GS, GSNames, GSDescs, geneList, name = NA_character_, 
-            sourceFile = NA_character_, GSSizeMin = 5, GSSizeMax = 1000)
+newGeneSets(GS, GSNames, GSDescs, geneList, scGSEA = FALSE, 
+            name = NA_character_, sourceFile = NA_character_, 
+            GSSizeMin = 5, GSSizeMax = 1000)
 }
 \arguments{
   \item{GS}{a list, each element is an integer vector, indicating the indexes of genes in each gene set. See \emph{Details} below.}
   \item{GSNames}{a character string vector, each is the name of each gene set.}
   \item{GSDescs}{a character string vector, each is the description of each gene set.}
   \item{geneList}{a character string vector of gene IDs. See \emph{Details} below. }
+  \item{scGSEA}{logical, if this object used for scGSEA. }
   \item{name}{the name of this category of gene sets.}
   \item{sourceFile}{the source file name of this category of gene sets. }
   \item{GSSizeMin}{the minimum number of genes in a gene set to be analyzed. Default: 5}

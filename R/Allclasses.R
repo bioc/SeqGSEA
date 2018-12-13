@@ -41,7 +41,7 @@ SeqGeneSet <- setClass("SeqGeneSet",
 
 newGeneSets <- function(GS, GSNames, GSDescs, geneList, scGSEA = FALSE, 
                         name = NA_character_, sourceFile = NA_character_, 
-                        GSSizeMin = 5, GSSizeMax = 1000 ) {
+                        GSSizeMin = 5, GSSizeMax = 1000) {
   stopifnot( length(GS) == length(GSNames) & length(GS) == length(GSDescs)) 
   stopifnot( max(unlist(GS)) <= length(geneList) )
   GSSize = unlist(lapply(GS, length))

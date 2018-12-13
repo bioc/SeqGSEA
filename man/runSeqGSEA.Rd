@@ -81,8 +81,10 @@ integrationMethod <- "linear"
 
 ### one step SeqGSEA running ###
 # Caution: if running the following command line, it will generate many files in your working directory
+## Not run:
 runSeqGSEA(data.dir=data.dir, case.pattern=case.pattern, ctrl.pattern=ctrl.pattern, 
            geneset.file=geneset.file, geneID.type=geneID.type, output.prefix=output.prefix,
            nCores=nCores, perm.times=perm.times, integrationMethod=integrationMethod,
            DEonly=DEonly, DEweight=DEweight)
+## End(Not run)
 }
