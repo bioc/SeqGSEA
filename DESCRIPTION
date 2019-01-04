@@ -2,7 +2,7 @@ Package: SeqGSEA
 Type: Package
 Title: Gene Set Enrichment Analysis (GSEA) of RNA-Seq Data: integrating
         differential expression and splicing
-Version: 1.22.0
+Version: 1.22.1
 Date: 2015-08-21
 Author: Xi Wang <Xi.Wang@newcastle.edu.au>
 Maintainer: Xi Wang <Xi.Wang@mdc-berlin.de>
@@ -18,5 +18,5 @@ License: GPL (>= 3)
 Depends: Biobase, doParallel, DESeq
 Imports: methods, biomaRt
 Suggests: easyRNASeq, GenomicRanges
-biocViews: Sequencing, RNASeq, GeneSetEnrichment, GeneExpression,
+biocViews: ImmunoOncology, Sequencing, RNASeq, GeneSetEnrichment, GeneExpression,
         DifferentialExpression
