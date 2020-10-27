@@ -2,7 +2,7 @@ Package: SeqGSEA
 Type: Package
 Title: Gene Set Enrichment Analysis (GSEA) of RNA-Seq Data: integrating
         differential expression and splicing
-Version: 1.30.0
+Version: 1.31.0
 Date: 2018-12-12
 Author: Xi Wang <Xi.Wang@newcastle.edu.au>
 Maintainer: Xi Wang <Xi.Wang@dkfz.de>
