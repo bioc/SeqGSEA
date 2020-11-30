@@ -1,3 +1,6 @@
+Version 1.31.1 (2020-11-30)
+- Depends on DESeq2 (previously DESeq)
+
 Version 1.1.5: (2013-09-01)
 
 - Added an all-in function runSeqGSEA() for one step analysis

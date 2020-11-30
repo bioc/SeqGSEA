@@ -15,7 +15,7 @@ runDESeq(geneCounts, label)
   \item{label}{the sample classification labels.}
 }
 \value{
-A CountDataSet object with size factors and dispersion parameters been estimated. 
+A DESeqDataSet object with size factors and dispersion parameters been estimated. 
 }
 \references{
 Anders, S. and Huber, W. (2010) Differential expression analysis for sequence count data, Genome Biol, 11, R106.
@@ -32,5 +32,5 @@ Xi Wang, xi.wang@newcastle.edu.au
 data(RCS_example, package="SeqGSEA")
 geneCounts <- getGeneCount(RCS_example)
 label <- label(RCS_example)
-DEG <- runDESeq(geneCounts, label)
+dds <- runDESeq(geneCounts, label)
 }

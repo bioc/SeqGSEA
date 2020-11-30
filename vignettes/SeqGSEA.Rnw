@@ -72,7 +72,7 @@ spliced genes based on sample label permutation.
 \subsection{Getting started}
 %------------------------------------------------------------------
 The \Rpackage{SeqGSEA} depends on \Rpackage{Biobase} for definitions 
-of class \Rclass{ReadCountSet} and class \Rclass{SeqGeneSet}, \Rpackage{DESeq} 
+of class \Rclass{ReadCountSet} and class \Rclass{SeqGeneSet}, \Rpackage{DESeq2} 
 for differential expression analysis, \Rpackage{biomaRt} for gene 
 IDs/names conversion, and \Rpackage{doParallel} for parallelizing jobs to 
 reduce running time. Make sure you have these dependent packages installed 
@@ -226,35 +226,35 @@ to 182 genes and 20 samples.
 \subsection{DE analysis and DE scores}
 %------------------------------------------------------------------
 DE analysis has been implemented in several \R{}/{\tt Bioconductor} packages, of which
-\Rpackage{DESeq} \citep{DESeq2010} is mainly utilized in \Rpackage{SeqGSEA} for DE analysis.
-With \Rpackage{DESeq}, we can model count data with negative binomial 
+\Rpackage{DESeq2} \citep{DESeq2010} is mainly utilized in \Rpackage{SeqGSEA} for DE analysis.
+With \Rpackage{DESeq2}, we can model count data with negative binomial 
 distributions for accounting biological variations and various biases introduced in RNA-Seq. 
 Given the read count data on individual genes and sample grouping information, 
-basic DE analysis based on \Rpackage{DESeq} including size factor estimation and 
+basic DE analysis based on \Rpackage{DESeq2} including size factor estimation and 
 dispersion estimation, is encapsulated in the function \Rfunction{runDESeq}. 
 \begin{center}
 <<DEseq, echo=TRUE,print=FALSE>>=
 label <- label(RCS_example)
-DEG <- runDESeq(geneCounts, label)
+dds <- runDESeq(geneCounts, label)
 @
 \end{center}
 \noindent
-The function \Rfunction{runDESeq} returns a \Robject{CountDataSet} object, which is defined in the 
-\Rpackage{DESeq} package. The DE analysis in the \Rpackage{DESeq} package continues with the output
-\Robject{CountDataSet} object and conducts negative-binomial-based statistical tests 
+The function \Rfunction{runDESeq} returns a \Robject{DESeqDataSet} object, which is defined in the 
+\Rpackage{DESeq2} package. The DE analysis in the \Rpackage{DESeq2} package continues with the output
+\Robject{DESeqDataSet} object and conducts negative-binomial-based statistical tests 
 for DE genes (using \Rfunction{nbinomTest} or \Rfunction{nbinomGLMTest}). 
 However, in this \Rpackage{SeqGSEA} package, we define NB statistics to 
 quantify each gene's expression difference between sample groups. 
 
 The NB statistics for DE can be achieved by the following scripts. 
 <<DSNB, echo=TRUE>>=
-DEGres <- DENBStat4GSEA(DEG)
+DEGres <- DENBStat4GSEA(dds)
 DEGres[1:5, "NBstat"]
 @
 Similarly, we run DE analysis on the permutation data sets as well. The \Robject{permuteMat} 
 should be the same as used in DS analysis on the permutation data sets. 
 <<DSNBpermut, echo=TRUE>>=
-DEpermNBstat <- DENBStatPermut4GSEA(DEG, permuteMat)
+DEpermNBstat <- DENBStatPermut4GSEA(dds, permuteMat)
 DEpermNBstat[1:5, 1:10]
 @
 
@@ -282,7 +282,7 @@ For a comparison to the nominal p-values from exact testing and forming comprehe
 users can run \Rfunction{DENBTest} first and then \Rfunction{DEpermutePval}, 
 which generates results as follows. 
 <<DEpval2,echo=TRUE>>=
-DEGres <- DENBTest(DEG)
+DEGres <- DENBTest(dds)
 DEGres <- DEpermutePval(DEGres, DEpermNBstat) 
 DEGres[1:6, c("NBstat", "pval", "padj", "perm.pval", "perm.padj")]
 @
@@ -630,10 +630,10 @@ RCS <- DSpermute4GSEA(RCS, permuteMat)
 geneCounts <- getGeneCount(RCS)
 # calculate DE NB statistics 
 label <- label(RCS)
-DEG <-runDESeq(geneCounts, label)
-DEGres <- DENBStat4GSEA(DEG)
+dds <-runDESeq(geneCounts, label)
+DEGres <- DENBStat4GSEA(dds)
 # calculate DE NB statistics on the permutation data sets
-DEpermNBstat <- DENBStatPermut4GSEA(DEG, permuteMat) # permutation
+DEpermNBstat <- DENBStatPermut4GSEA(dds, permuteMat) # permutation
 @
 
 \item [Step 3:] score integration
@@ -718,11 +718,11 @@ geneCounts <- read.table(count.file)
 # speficify the labels of each sample
 label <- as.factor(c(rep(1,10), rep(0,10)))
 # calculate DE NB statistics 
-DEG <-runDESeq(geneCounts, label)
-DEGres <- DENBStat4GSEA(DEG)
+dds <-runDESeq(geneCounts, label)
+DEGres <- DENBStat4GSEA(dds)
 # calculate DE NB statistics on the permutation data sets
 permuteMat <- genpermuteMat(label, times=perm.times)
-DEpermNBstat <- DENBStatPermut4GSEA(DEG, permuteMat) # permutation
+DEpermNBstat <- DENBStatPermut4GSEA(dds, permuteMat) # permutation
 @
 
 \item [Step 2:] score normalization 

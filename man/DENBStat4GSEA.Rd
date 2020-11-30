@@ -11,10 +11,10 @@ calculate NB test p-values.
 This function only works with two-group comparison. 
 }
 \usage{
-DENBStat4GSEA(cds)
+DENBStat4GSEA(dds)
 }
 \arguments{
-  \item{cds}{A CountDataSet object with size factors and dispersion parameters estimated. Recommended to take the output of \code{\link{runDESeq}}. }
+  \item{dds}{A DESeqDataSet object with size factors and dispersion parameters estimated. Recommended to take the output of \code{\link{runDESeq}}. }
 }
 \note{
 The results with the output of \code{\link{DENBStatPermut4GSEA}} can also be used to run \code{\link{DEpermutePval}}.

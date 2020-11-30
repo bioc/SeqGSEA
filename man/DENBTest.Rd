@@ -7,10 +7,10 @@ Perform negative binomial exact test for differential expression
 Perform negative binomial exact test for differential expression - a modified version of nbinomTest in DESeq package. 
 }
 \usage{
-DENBTest(cds)
+DENBTest(dds)
 }
 \arguments{
-  \item{cds}{A CountDataSet object with size factors and dispersion parameters estimated. Recommended to take the output of \code{\link{runDESeq}}.}
+  \item{dds}{A DESeqDataSet object with size factors and dispersion parameters estimated. Recommended to take the output of \code{\link{runDESeq}}.}
 }
 \value{
 A data frame of the test results. Information contains mean expression values, NB-statistics, (log) fold-changes, p-values, and adjusted p-values. 
